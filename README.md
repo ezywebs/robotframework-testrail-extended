@@ -1,9 +1,10 @@
-# RobotFramework Testrail
+# RobotFramework Testrail Extended
 
 [![Build Status](https://travis-ci.org/peterservice-rnd/robotframework-testrail.svg?branch=master)](https://travis-ci.org/peterservice-rnd/robotframework-testrail)
 
 Short Description
 ---
+This is a fork of [RobotFramework Testrail](https://github.com/peterservice-rnd/robotframework-testrail).
 
 [Robot Framework](http://www.robotframework.org) library, listener and pre-run modifier for working with TestRail.
 
