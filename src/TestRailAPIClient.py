@@ -342,3 +342,36 @@ class TestRailAPIClient(object):
 
         response = self._send_post(uri=uri, data=data)
         return cast(JsonDict, response)
+
+    def add_test_run(self, project_id: Id, suite_id: Id = None, name: str = "Test run"):
+        """Adds test run to specified project
+        *Supported request fields for test result:*\n
+        | *Name*        | *Type*    | *Description*                                                         |
+        | suite_id      | int       | The ID of the test suite for the test run (optional if the project is
+                                        operating in single suite mode, required otherwise)                 |
+        | name          | string    | The name of the test run                                              |
+        | description   | string    | The description of the test run                                       |
+        | milestone_id  | int       | The ID of the milestone to link to the test run                       |
+        | assignedto_id | int       | The ID of the user the test run should be assigned to                 |
+        | include_all   | bool      | True for including all test cases of the test suite and false for a
+                                        custom case selection (default: true)                               |
+        | case_ids      | array     | An array of case IDs for the custom case selection                    |
+        | refs          | string    | A comma-separated list of references/requirements
+                                        (Requires TestRail 6.1 or later)                                    |
+
+        *Args:* \n
+            _project_id_ - ID of the project;\n
+            _suite_id_ - ID of the test suite(ignored if the project is operating in single suite mode);\n
+            _name_ - name of test run;\n
+
+        *Returns:* \n
+            Test Run information.
+        """
+
+        uri = 'add_run/{project_id}'.format(project_id=project_id)
+        data: Dict[str, Union[int, str]] = {'name': name}
+        if suite_id is not None:
+            data['suite_id'] = suite_id
+
+        response = self._send_post(uri=uri, data=data)
+        return cast(JsonDict, response)
