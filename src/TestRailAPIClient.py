@@ -22,7 +22,7 @@ class TestRailAPIClient(object):
     1. [ http://docs.gurock.com/testrail-api2/introduction | Enable TestRail API]
     """
 
-    def __init__(self, server: str, user: str, password: str, run_id: Id, protocol: str = 'http') -> None:
+    def __init__(self, server: str, user: str, password: str, run_id: Id = None, protocol: str = 'http') -> None:
         """Create TestRailAPIClient instance.
 
         *Args:*\n
@@ -35,7 +35,8 @@ class TestRailAPIClient(object):
         self._url = '{protocol}://{server}/testrail/index.php?/api/v2/'.format(protocol=protocol, server=server)
         self._user = user
         self._password = password
-        self.run_id = run_id
+        if run_id is not None:
+            self.run_id = run_id
 
     def _send_post(self, uri: str, data: Dict[str, Any]) -> Union[JsonList, JsonDict]:
         """Perform post request to TestRail.
