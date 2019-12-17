@@ -375,4 +375,5 @@ class TestRailAPIClient(object):
             data['suite_id'] = suite_id
 
         response = self._send_post(uri=uri, data=data)
+        self.run_id = response['id']
         return cast(JsonDict, response)
